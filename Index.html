@@ -8,35 +8,61 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
         }
 
+        /* Header Styling */
         header {
-            background-color: #007bff;
+            background-color: #343a40;
             color: white;
+            padding: 40px 0;
             text-align: center;
-            padding: 20px 0;
+            border-bottom: 5px solid #007bff;
+        }
+
+        /* Card Styling */
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .container {
-            margin-top: 20px;
+            margin-top: 50px;
+            max-width: 600px;
         }
 
-        .card {
-            margin-bottom: 20px;
-        }
-
+        /* Footer Styling */
         footer {
             background-color: #343a40;
             color: white;
             text-align: center;
             padding: 10px 0;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
+            margin-top: 50px;
+        }
+
+        /* Button Styling */
+        button.btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: background-color 0.3s;
+        }
+
+        button.btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive */
+        @media (max-width: 576px) {
+            header h1 {
+                font-size: 24px;
+            }
+
+            footer {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -44,31 +70,28 @@
 
     <!-- Header -->
     <header>
-        <h1>Event Checker</h1>
+        <h1>Check Events on Your Selected Date</h1>
         <p id="currentDateTime"></p>
     </header>
 
+    <!-- Main Content -->
     <div class="container">
-        <!-- Date and Event Form -->
-        <div class="card">
-            <div class="card-body">
-                <h3>Select Date to Check Events</h3>
-                <form id="eventForm">
-                    <div class="form-group">
-                        <label for="eventDate">Choose a Date:</label>
-                        <input type="date" id="eventDate" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Check Events</button>
-                </form>
-            </div>
+        <!-- Event Form -->
+        <div class="card p-4">
+            <h3>Select Date</h3>
+            <form id="eventForm">
+                <div class="form-group">
+                    <label for="eventDate">Choose a Date:</label>
+                    <input type="date" id="eventDate" class="form-control form-control-lg" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Check Events</button>
+            </form>
         </div>
 
-        <!-- Display Events -->
-        <div class="card">
-            <div class="card-body">
-                <h3>Events on Selected Date</h3>
-                <p id="eventOutput">No events yet. Please select a date.</p>
-            </div>
+        <!-- Event Output -->
+        <div class="card mt-4 p-4">
+            <h3>Events on Selected Date</h3>
+            <p id="eventOutput" class="text-muted">No events yet. Please select a date.</p>
         </div>
     </div>
 
@@ -79,7 +102,7 @@
 
     <!-- JavaScript -->
     <script>
-        // Example list of events
+        // Example events data
         const events = {
             '2024-09-04': 'Ganesh Chaturthi',
             '2024-12-25': 'Christmas',
@@ -87,17 +110,17 @@
             '2024-08-15': 'Independence Day'
         };
 
-        // Function to display the current date and time
+        // Function to display current date and time
         function updateDateTime() {
             const currentDateTime = new Date();
             const dateTimeElement = document.getElementById('currentDateTime');
             dateTimeElement.textContent = `Current Date and Time: ${currentDateTime.toLocaleDateString()} ${currentDateTime.toLocaleTimeString()}`;
         }
 
-        // Update the date and time every second
+        // Update the current time every second
         setInterval(updateDateTime, 1000);
 
-        // Event listener for form submission
+        // Handle form submission
         document.getElementById('eventForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
@@ -106,8 +129,12 @@
 
             if (events[selectedDate]) {
                 eventOutput.textContent = `Event: ${events[selectedDate]}`;
+                eventOutput.classList.remove('text-muted');
+                eventOutput.classList.add('text-primary');
             } else {
                 eventOutput.textContent = 'No events found for the selected date.';
+                eventOutput.classList.add('text-muted');
+                eventOutput.classList.remove('text-primary');
             }
         });
     </script>
