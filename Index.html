@@ -3,10 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Event Checker</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>V1</h1>
-    <h1>V2</h1>
+
+    <!-- Header -->
+    <header>
+        <h1>Event Checker</h1>
+        <p id="currentDateTime"></p>
+    </header>
+
+    <div class="container">
+        <!-- Date and Event Form -->
+        <div class="card">
+            <div class="card-body">
+                <h3>Select Date to Check Events</h3>
+                <form id="eventForm">
+                    <div class="form-group">
+                        <label for="eventDate">Choose a Date:</label>
+                        <input type="date" id="eventDate" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Check Events</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Display Events -->
+        <div class="card">
+            <div class="card-body">
+                <h3>Events on Selected Date</h3>
+                <p id="eventOutput">No events yet. Please select a date.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Event Checker. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Example list of events
+        const events = {
+            '2024-09-04': 'Ganesh Chaturthi',
+            '2024-12-25': 'Christmas',
+            '2024-01-01': 'New Year\'s Day',
+            '2024-08-15': 'Independence Day'
+        };
+
+        // Function to display the current date and time
+        function updateDateTime() {
+            const currentDateTime = new Date();
+            const dateTimeElement = document.getElementById('currentDateTime');
+            dateTimeElement.textContent = `Current Date and Time: ${currentDateTime.toLocaleDateString()} ${currentDateTime.toLocaleTimeString()}`;
+        }
+
+        // Update the date and time every second
+        setInterval(updateDateTime, 1000);
+
+        // Event listener for form submission
+        document.getElementById('eventForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const selectedDate = document.getElementById('eventDate').value;
+            const eventOutput = document.getElementById('eventOutput');
+
+            if (events[selectedDate]) {
+                eventOutput.textContent = `Event: ${events[selectedDate]}`;
+            } else {
+                eventOutput.textContent = 'No events found for the selected date.';
+            }
+        });
+    </script>
 </body>
 </html>
