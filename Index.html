@@ -3,66 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Checker</title>
-    <!-- Bootstrap CSS -->
+    <title>Git Basics</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f4f6f9;
         }
-
-        /* Header Styling */
         header {
             background-color: #343a40;
             color: white;
-            padding: 40px 0;
+            padding: 30px 0;
             text-align: center;
-            border-bottom: 5px solid #007bff;
         }
-
-        /* Card Styling */
-        .card {
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        h1, h2 {
+            color: #007bff;
         }
-
         .container {
-            margin-top: 50px;
-            max-width: 600px;
+            margin-top: 20px;
         }
-
-        /* Footer Styling */
+        .card {
+            margin-bottom: 20px;
+        }
         footer {
             background-color: #343a40;
             color: white;
             text-align: center;
             padding: 10px 0;
-            margin-top: 50px;
+            margin-top: 30px;
         }
-
-        /* Button Styling */
-        button.btn-primary {
-            background-color: #007bff;
+        .btn-git {
+            background-color: #f34f29;
             border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            transition: background-color 0.3s;
         }
-
-        button.btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        /* Responsive */
-        @media (max-width: 576px) {
-            header h1 {
-                font-size: 24px;
-            }
-
-            footer {
-                font-size: 14px;
-            }
+        .btn-git:hover {
+            background-color: #d63a22;
         }
     </style>
 </head>
@@ -70,73 +44,104 @@
 
     <!-- Header -->
     <header>
-        <h1>Check Events on Your Selected Date</h1>
-        <p id="currentDateTime"></p>
+        <h1>Learn Git Basics</h1>
+        <p>Your guide to understanding and using Git for version control</p>
     </header>
 
     <!-- Main Content -->
     <div class="container">
-        <!-- Event Form -->
-        <div class="card p-4">
-            <h3>Select Date</h3>
-            <form id="eventForm">
-                <div class="form-group">
-                    <label for="eventDate">Choose a Date:</label>
-                    <input type="date" id="eventDate" class="form-control form-control-lg" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Check Events</button>
-            </form>
+        <!-- Introduction Section -->
+        <div class="card">
+            <div class="card-body">
+                <h2>What is Git?</h2>
+                <p>Git is a distributed version control system that allows multiple developers to work on a project without overriding each other's changes. It’s widely used in software development to track changes in source code during development.</p>
+                <a href="https://git-scm.com/" target="_blank" class="btn btn-git">Learn More on Official Site</a>
+            </div>
         </div>
 
-        <!-- Event Output -->
-        <div class="card mt-4 p-4">
-            <h3>Events on Selected Date</h3>
-            <p id="eventOutput" class="text-muted">No events yet. Please select a date.</p>
+        <!-- Installation Section -->
+        <div class="card">
+            <div class="card-body">
+                <h2>How to Install Git</h2>
+                <p>Here are the steps to install Git on different platforms:</p>
+                <ul>
+                    <li><strong>Windows:</strong> Download the latest version from the <a href="https://gitforwindows.org/" target="_blank">Git for Windows</a> website and follow the setup instructions.</li>
+                    <li><strong>Mac:</strong> Use Homebrew: <code>brew install git</code>.</li>
+                    <li><strong>Linux:</strong> Install Git using the package manager, e.g., <code>sudo apt-get install git</code> for Ubuntu.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Basic Git Commands Section -->
+        <div class="card">
+            <div class="card-body">
+                <h2>Basic Git Commands</h2>
+                <p>Here are some essential Git commands every developer should know:</p>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>git init</code></td>
+                            <td>Initialize a new Git repository.</td>
+                        </tr>
+                        <tr>
+                            <td><code>git clone [url]</code></td>
+                            <td>Clone a repository from a URL.</td>
+                        </tr>
+                        <tr>
+                            <td><code>git add [file]</code></td>
+                            <td>Stage changes to be committed.</td>
+                        </tr>
+                        <tr>
+                            <td><code>git commit -m "message"</code></td>
+                            <td>Commit staged changes with a message.</td>
+                        </tr>
+                        <tr>
+                            <td><code>git push</code></td>
+                            <td>Push changes to a remote repository.</td>
+                        </tr>
+                        <tr>
+                            <td><code>git pull</code></td>
+                            <td>Fetch and merge changes from the remote repository.</td>
+                        </tr>
+                        <tr>
+                            <td><code>git status</code></td>
+                            <td>Check the status of your repository.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Git Workflow Section -->
+        <div class="card">
+            <div class="card-body">
+                <h2>Git Workflow</h2>
+                <p>In a typical Git workflow, you perform the following steps:</p>
+                <ul>
+                    <li><strong>Clone or Initialize:</strong> Start with an existing repository or initialize a new one.</li>
+                    <li><strong>Make Changes:</strong> Modify files or add new ones.</li>
+                    <li><strong>Stage Changes:</strong> Use <code>git add</code> to stage the changes you want to commit.</li>
+                    <li><strong>Commit Changes:</strong> Use <code>git commit</code> to save your changes with a descriptive message.</li>
+                    <li><strong>Push to Remote:</strong> If you're working with a team, push your changes to a remote repository using <code>git push</code>.</li>
+                </ul>
+            </div>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Event Checker. All rights reserved.</p>
+        <p>&copy; 2024 Git Basics Guide. All rights reserved.</p>
     </footer>
 
     <!-- JavaScript -->
-    <script>
-        // Example events data
-        const events = {
-            '2024-09-04': 'Ganesh Chaturthi',
-            '2024-12-25': 'Christmas',
-            '2024-01-01': 'New Year\'s Day',
-            '2024-08-15': 'Independence Day'
-        };
-
-        // Function to display current date and time
-        function updateDateTime() {
-            const currentDateTime = new Date();
-            const dateTimeElement = document.getElementById('currentDateTime');
-            dateTimeElement.textContent = `Current Date and Time: ${currentDateTime.toLocaleDateString()} ${currentDateTime.toLocaleTimeString()}`;
-        }
-
-        // Update the current time every second
-        setInterval(updateDateTime, 1000);
-
-        // Handle form submission
-        document.getElementById('eventForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const selectedDate = document.getElementById('eventDate').value;
-            const eventOutput = document.getElementById('eventOutput');
-
-            if (events[selectedDate]) {
-                eventOutput.textContent = `Event: ${events[selectedDate]}`;
-                eventOutput.classList.remove('text-muted');
-                eventOutput.classList.add('text-primary');
-            } else {
-                eventOutput.textContent = 'No events found for the selected date.';
-                eventOutput.classList.add('text-muted');
-                eventOutput.classList.remove('text-primary');
-            }
-        });
-    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
