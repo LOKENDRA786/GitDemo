@@ -3,66 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Checker</title>
+    <title>Git Branch Merge Cases</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f4f6f9;
         }
 
         /* Header Styling */
         header {
             background-color: #343a40;
             color: white;
-            padding: 40px 0;
+            padding: 30px 0;
             text-align: center;
-            border-bottom: 5px solid #007bff;
         }
 
-        /* Card Styling */
-        .card {
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        h2 {
+            color: #007bff;
         }
 
         .container {
-            margin-top: 50px;
-            max-width: 600px;
+            margin-top: 20px;
         }
 
-        /* Footer Styling */
+        .card {
+            margin-bottom: 20px;
+        }
+
         footer {
             background-color: #343a40;
             color: white;
             text-align: center;
             padding: 10px 0;
-            margin-top: 50px;
+            margin-top: 30px;
         }
 
-        /* Button Styling */
-        button.btn-primary {
-            background-color: #007bff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            transition: background-color 0.3s;
+        .nav-link {
+            color: white;
+            transition: color 0.2s;
         }
 
-        button.btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        /* Responsive */
-        @media (max-width: 576px) {
-            header h1 {
-                font-size: 24px;
-            }
-
-            footer {
-                font-size: 14px;
-            }
+        .nav-link:hover {
+            color: #007bff;
         }
     </style>
 </head>
@@ -70,73 +53,109 @@
 
     <!-- Header -->
     <header>
-        <h1>Check Events on Your Selected Date</h1>
-        <p id="currentDateTime"></p>
+        <h1>Git Branch Merge Cases</h1>
+        <p>A comprehensive guide to all Git branch merge scenarios</p>
     </header>
+
+    <!-- Navigation Menu -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Git Merge</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="#fastForward">Fast-forward Merge</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#noFFMerge">No Fast-forward Merge</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#threeWayMerge">Three-way Merge</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#mergeConflicts">Merge Conflicts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#unrelatedHistory">Unrelated History Merge</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <!-- Main Content -->
     <div class="container">
-        <!-- Event Form -->
-        <div class="card p-4">
-            <h3>Select Date</h3>
-            <form id="eventForm">
-                <div class="form-group">
-                    <label for="eventDate">Choose a Date:</label>
-                    <input type="date" id="eventDate" class="form-control form-control-lg" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Check Events</button>
-            </form>
+        <!-- Fast-forward Merge -->
+        <div id="fastForward" class="card">
+            <div class="card-body">
+                <h2>Fast-forward Merge</h2>
+                <p>A fast-forward merge happens when there is a direct path between the branch you're on and the branch you're merging into. In this case, Git moves the pointer forward, and no new commit is created.</p>
+                <pre><code>
+# Scenario: Branch 'feature' is ahead of 'main'
+git checkout main
+git merge feature
+                </code></pre>
+            </div>
         </div>
 
-        <!-- Event Output -->
-        <div class="card mt-4 p-4">
-            <h3>Events on Selected Date</h3>
-            <p id="eventOutput" class="text-muted">No events yet. Please select a date.</p>
+        <!-- No Fast-forward Merge -->
+        <div id="noFFMerge" class="card">
+            <div class="card-body">
+                <h2>No Fast-forward Merge</h2>
+                <p>A no fast-forward merge is used to ensure that a merge commit is always created, even when a fast-forward merge is possible. This is useful for preserving the history of branches.</p>
+                <pre><code>
+# Scenario: Force Git to create a merge commit
+git checkout main
+git merge --no-ff feature
+                </code></pre>
+            </div>
+        </div>
+
+        <!-- Three-way Merge -->
+        <div id="threeWayMerge" class="card">
+            <div class="card-body">
+                <h2>Three-way Merge</h2>
+                <p>In a three-way merge, there is no direct path between the branches, and Git must create a new commit that ties the histories of both branches together.</p>
+                <pre><code>
+# Scenario: 'feature' and 'main' have diverged
+git checkout main
+git merge feature
+                </code></pre>
+            </div>
+        </div>
+
+        <!-- Merge Conflicts -->
+        <div id="mergeConflicts" class="card">
+            <div class="card-body">
+                <h2>Merge Conflicts</h2>
+                <p>Merge conflicts occur when two branches modify the same part of a file in different ways. Git cannot automatically resolve these conflicts and requires manual intervention.</p>
+                <pre><code>
+# Scenario: Resolve conflicts manually
+git checkout main
+git merge feature
+
+# When conflict arises, resolve it in the files and then
+git add [resolved-file]
+git commit
+                </code></pre>
+            </div>
+        </div>
+
+        <!-- Unrelated History Merge -->
+        <div id="unrelatedHistory" class="card">
+            <div class="card-body">
+                <h2>Merge Unrelated Histories</h2>
+                <p>This happens when you try to merge branches that have completely different commit histories, like merging two separate projects. Git requires the <code>--allow-unrelated-histories</code> flag.</p>
+                <pre><code>
+# Scenario: Merging branches with different histories
+git checkout main
+git merge --allow-unrelated-histories feature
+                </code></pre>
+            </div>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Event Checker. All rights reserved.</p>
+        <p>&copy; 2024 Git Merge Guide. All rights reserved.</p>
     </footer>
 
     <!-- JavaScript -->
-    <script>
-        // Example events data
-        const events = {
-            '2024-09-04': 'Ganesh Chaturthi',
-            '2024-12-25': 'Christmas',
-            '2024-01-01': 'New Year\'s Day',
-            '2024-08-15': 'Independence Day'
-        };
-
-        // Function to display current date and time
-        function updateDateTime() {
-            const currentDateTime = new Date();
-            const dateTimeElement = document.getElementById('currentDateTime');
-            dateTimeElement.textContent = `Current Date and Time: ${currentDateTime.toLocaleDateString()} ${currentDateTime.toLocaleTimeString()}`;
-        }
-
-        // Update the current time every second
-        setInterval(updateDateTime, 1000);
-
-        // Handle form submission
-        document.getElementById('eventForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const selectedDate = document.getElementById('eventDate').value;
-            const eventOutput = document.getElementById('eventOutput');
-
-            if (events[selectedDate]) {
-                eventOutput.textContent = `Event: ${events[selectedDate]}`;
-                eventOutput.classList.remove('text-muted');
-                eventOutput.classList.add('text-primary');
-            } else {
-                eventOutput.textContent = 'No events found for the selected date.';
-                eventOutput.classList.add('text-muted');
-                eventOutput.classList.remove('text-primary');
-            }
-        });
-    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
