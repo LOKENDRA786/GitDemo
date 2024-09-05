@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Git Basics Website</title>
+    <title>Git Branch Merge Cases After Merge : merge all</title>
+    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -15,15 +16,18 @@
             padding: 30px 0;
             text-align: center;
         }
-        h1, h2 {
+
+        h2 {
             color: #007bff;
         }
         .container {
             margin-top: 20px;
         }
+
         .card {
             margin-bottom: 20px;
         }
+
         footer {
             background-color: #343a40;
             color: white;
@@ -31,12 +35,14 @@
             padding: 10px 0;
             margin-top: 30px;
         }
-        .btn-git {
-            background-color: #f34f29;
-            border: none;
+
+        .nav-link {
+            color: white;
+            transition: color 0.2s;
         }
-        .btn-git:hover {
-            background-color: #d63a22;
+
+        .nav-link:hover {
+            color: #007bff;
         }
     </style>
 </head>
@@ -44,99 +50,104 @@
 
     <!-- Header -->
     <header>
-        <h1>Learn Git Basics</h1>
-        <p>Your guide to understanding and using Git for version control</p>
+        <h1>Git Branch Merge Cases</h1>
+        <p>A comprehensive guide to all Git branch merge scenarios</p>
     </header>
+
+    <!-- Navigation Menu -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Git Merge</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="#fastForward">Fast-forward Merge</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#noFFMerge">No Fast-forward Merge</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#threeWayMerge">Three-way Merge</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#mergeConflicts">Merge Conflicts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#unrelatedHistory">Unrelated History Merge</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <!-- Main Content -->
     <div class="container">
-        <!-- Introduction Section -->
-        <div class="card">
+        <!-- Fast-forward Merge -->
+        <div id="fastForward" class="card">
             <div class="card-body">
-                <h2>What is Git?</h2>
-                <p>Git is a distributed version control system that allows multiple developers to work on a project without overriding each other's changes. It’s widely used in software development to track changes in source code during development.</p>
-                <a href="https://git-scm.com/" target="_blank" class="btn btn-git">Learn More on Official Site</a>
+                <h2>Fast-forward Merge</h2>
+                <p>A fast-forward merge happens when there is a direct path between the branch you're on and the branch you're merging into. In this case, Git moves the pointer forward, and no new commit is created.</p>
+                <pre><code>
+# Scenario: Branch 'feature' is ahead of 'main'
+git checkout main
+git merge feature
+                </code></pre>
             </div>
         </div>
 
-        <!-- Installation Section -->
-        <div class="card">
+        <!-- No Fast-forward Merge -->
+        <div id="noFFMerge" class="card">
             <div class="card-body">
-                <h2>How to Install Git</h2>
-                <p>Here are the steps to install Git on different platforms:</p>
-                <ul>
-                    <li><strong>Windows:</strong> Download the latest version from the <a href="https://gitforwindows.org/" target="_blank">Git for Windows</a> website and follow the setup instructions.</li>
-                    <li><strong>Mac:</strong> Use Homebrew: <code>brew install git</code>.</li>
-                    <li><strong>Linux:</strong> Install Git using the package manager, e.g., <code>sudo apt-get install git</code> for Ubuntu.</li>
-                </ul>
+                <h2>No Fast-forward Merge</h2>
+                <p>A no fast-forward merge is used to ensure that a merge commit is always created, even when a fast-forward merge is possible. This is useful for preserving the history of branches.</p>
+                <pre><code>
+# Scenario: Force Git to create a merge commit
+git checkout main
+git merge --no-ff feature
+                </code></pre>
             </div>
         </div>
 
-        <!-- Basic Git Commands Section -->
-        <div class="card">
+        <!-- Three-way Merge -->
+        <div id="threeWayMerge" class="card">
             <div class="card-body">
-                <h2>Basic Git Commands</h2>
-                <p>Here are some essential Git commands every developer should know:</p>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Command</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>git init</code></td>
-                            <td>Initialize a new Git repository.</td>
-                        </tr>
-                        <tr>
-                            <td><code>git clone [url]</code></td>
-                            <td>Clone a repository from a URL.</td>
-                        </tr>
-                        <tr>
-                            <td><code>git add [file]</code></td>
-                            <td>Stage changes to be committed.</td>
-                        </tr>
-                        <tr>
-                            <td><code>git commit -m "message"</code></td>
-                            <td>Commit staged changes with a message.</td>
-                        </tr>
-                        <tr>
-                            <td><code>git push</code></td>
-                            <td>Push changes to a remote repository.</td>
-                        </tr>
-                        <tr>
-                            <td><code>git pull</code></td>
-                            <td>Fetch and merge changes from the remote repository.</td>
-                        </tr>
-                        <tr>
-                            <td><code>git status</code></td>
-                            <td>Check the status of your repository.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h2>Three-way Merge</h2>
+                <p>In a three-way merge, there is no direct path between the branches, and Git must create a new commit that ties the histories of both branches together.</p>
+                <pre><code>
+# Scenario: 'feature' and 'main' have diverged
+git checkout main
+git merge feature
+                </code></pre>
             </div>
         </div>
 
-        <!-- Git Workflow Section -->
-        <div class="card">
+        <!-- Merge Conflicts -->
+        <div id="mergeConflicts" class="card">
             <div class="card-body">
-                <h2>Git Workflow</h2>
-                <p>In a typical Git workflow, you perform the following steps:</p>
-                <ul>
-                    <li><strong>Clone or Initialize:</strong> Start with an existing repository or initialize a new one.</li>
-                    <li><strong>Make Changes:</strong> Modify files or add new ones.</li>
-                    <li><strong>Stage Changes:</strong> Use <code>git add</code> to stage the changes you want to commit.</li>
-                    <li><strong>Commit Changes:</strong> Use <code>git commit</code> to save your changes with a descriptive message.</li>
-                    <li><strong>Push to Remote:</strong> If you're working with a team, push your changes to a remote repository using <code>git push</code>.</li>
-                </ul>
+                <h2>Merge Conflicts</h2>
+                <p>Merge conflicts occur when two branches modify the same part of a file in different ways. Git cannot automatically resolve these conflicts and requires manual intervention.</p>
+                <pre><code>
+# Scenario: Resolve conflicts manually
+git checkout main
+git merge feature
+
+# When conflict arises, resolve it in the files and then
+git add [resolved-file]
+git commit
+                </code></pre>
+            </div>
+        </div>
+
+        <!-- Unrelated History Merge -->
+        <div id="unrelatedHistory" class="card">
+            <div class="card-body">
+                <h2>Merge Unrelated Histories</h2>
+                <p>This happens when you try to merge branches that have completely different commit histories, like merging two separate projects. Git requires the <code>--allow-unrelated-histories</code> flag.</p>
+                <pre><code>
+# Scenario: Merging branches with different histories
+git checkout main
+git merge --allow-unrelated-histories feature
+                </code></pre>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Git Basics Guide. All rights reserved.</p>
+        <p>&copy; 2024 Git Merge Guide. All rights reserved.</p>
     </footer>
 
     <!-- JavaScript -->
