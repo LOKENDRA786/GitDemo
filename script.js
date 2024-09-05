@@ -16,10 +16,14 @@ const segments = [
   { label: "100 Points", color: "#00FFFF" }
 ];
 
-// Basic wheel configuration
+// Wheel properties
 const numSegments = segments.length;
 const segmentAngle = (2 * Math.PI) / numSegments;
-let angle = 0; // Current angle of the wheel
+let angle = 0;
+let spinAngleStart = 0;
+let spinTime = 0;
+let spinTimeTotal = 0;
+let isSpinning = false;
 
 // Draw the wheel
 function drawWheel() {
@@ -27,51 +31,56 @@ function drawWheel() {
     const startAngle = i * segmentAngle;
     const endAngle = startAngle + segmentAngle;
 
-    // Set color for each segment
+    // Draw each segment
     ctx.beginPath();
     ctx.moveTo(250, 250);
     ctx.arc(250, 250, 250, startAngle, endAngle);
-    ctx.closePath();
     ctx.fillStyle = segments[i].color;
     ctx.fill();
+    ctx.stroke();
 
-    // Add labels for each segment
+    // Add text to each segment
     ctx.save();
     ctx.translate(250, 250);
     ctx.rotate(startAngle + segmentAngle / 2);
+    ctx.textAlign = "right";
     ctx.fillStyle = "#000";
-    ctx.font = "18px Arial";
-    ctx.fillText(segments[i].label, 100, 10);
+    ctx.font = "bold 16px Arial";
+    ctx.fillText(segments[i].label, 220, 10);
     ctx.restore();
   }
 }
 
-// Spin logic
-let spinning = false;
-let spinSpeed = 0;
+// Spin the wheel
+function rotateWheel() {
+  spinTime += 30;
 
-function spinWheel() {
-  if (spinning) return; // Prevent multiple spins at once
-  spinning = true;
+  if (spinTime >= spinTimeTotal) {
+    stopRotateWheel();
+    return;
+  }
 
-  spinSpeed = Math.random() * 0.3 + 0.2; // Random spin speed
+  const spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
+  angle += (spinAngle * Math.PI) / 180;
+  draw();
 
-  const spinInterval = setInterval(() => {
-    angle += spinSpeed;
-    spinSpeed *= 0.99; // Slow down gradually
-    if (spinSpeed < 0.01) {
-      clearInterval(spinInterval);
-      spinning = false;
-      showResult();
-    }
-
-    draw();
-  }, 16);
+  requestAnimationFrame(rotateWheel);
 }
 
-// Draw the spinning wheel
+function easeOut(t, b, c, d) {
+  const ts = (t /= d) * t;
+  const tc = ts * t;
+  return b + c * (tc + -3 * ts + 3 * t);
+}
+
+function stopRotateWheel() {
+  const index = Math.floor(numSegments - (angle % (2 * Math.PI)) / segmentAngle) % numSegments;
+  resultText.innerText = `You won ${segments[index].label}`;
+  isSpinning = false;
+}
+
 function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, 500, 500);
   ctx.save();
   ctx.translate(250, 250);
   ctx.rotate(angle);
@@ -79,13 +88,10 @@ function draw() {
   ctx.restore();
 }
 
-// Show the result of the spin
-function showResult() {
-  const winningSegment = segments[Math.floor((angle / segmentAngle) % numSegments)];
-  resultText.innerText = `Congratulations! You won ${winningSegment.label}!`;
-}
+spinButton.addEventListener("click", function () {
+  if (isSpinning) return;
+  isSpinning = true;
 
-spinButton.addEventListener("click", spinWheel);
-
-// Initial draw
-drawWheel();
+  spinAngleStart = Math.random() * 500 + 500;
+  spinTime = 0;
+  spinTime

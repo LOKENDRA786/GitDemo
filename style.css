@@ -12,6 +12,21 @@ body {
     text-align: center;
 }
 
+.wheel-container {
+    position: relative;
+}
+
+#pointer {
+    position: absolute;
+    top: 200px;
+    left: 220px;
+    width: 60px;
+    height: 60px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 40px solid red;
+}
+
 canvas {
     margin: 20px 0;
 }
@@ -35,4 +50,3 @@ h2 {
     font-size: 24px;
     color: #28a745;
 }
-    
