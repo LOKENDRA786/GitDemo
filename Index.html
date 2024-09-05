@@ -3,156 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Git Branch Merge Cases After Merge : merge all</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-        }
-        header {
-            background-color: #343a40;
-            color: white;
-            padding: 30px 0;
-            text-align: center;
-        }
-
-        h2 {
-            color: #007bff;
-        }
-        .container {
-            margin-top: 20px;
-        }
-
-        .card {
-            margin-bottom: 20px;
-        }
-
-        footer {
-            background-color: #343a40;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            margin-top: 30px;
-        }
-
-        .nav-link {
-            color: white;
-            transition: color 0.2s;
-        }
-
-        .nav-link:hover {
-            color: #007bff;
-        }
-    </style>
+    <title>Spin the Wheel Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <h1>Git Branch Merge Cases</h1>
-        <p>A comprehensive guide to all Git branch merge scenarios</p>
-    </header>
-
-    <!-- Navigation Menu -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">Git Merge</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="#fastForward">Fast-forward Merge</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#noFFMerge">No Fast-forward Merge</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#threeWayMerge">Three-way Merge</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#mergeConflicts">Merge Conflicts</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#unrelatedHistory">Unrelated History Merge</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
     <div class="container">
-        <!-- Fast-forward Merge -->
-        <div id="fastForward" class="card">
-            <div class="card-body">
-                <h2>Fast-forward Merge</h2>
-                <p>A fast-forward merge happens when there is a direct path between the branch you're on and the branch you're merging into. In this case, Git moves the pointer forward, and no new commit is created.</p>
-                <pre><code>
-# Scenario: Branch 'feature' is ahead of 'main'
-git checkout main
-git merge feature
-                </code></pre>
-            </div>
-        </div>
-
-        <!-- No Fast-forward Merge -->
-        <div id="noFFMerge" class="card">
-            <div class="card-body">
-                <h2>No Fast-forward Merge</h2>
-                <p>A no fast-forward merge is used to ensure that a merge commit is always created, even when a fast-forward merge is possible. This is useful for preserving the history of branches.</p>
-                <pre><code>
-# Scenario: Force Git to create a merge commit
-git checkout main
-git merge --no-ff feature
-                </code></pre>
-            </div>
-        </div>
-
-        <!-- Three-way Merge -->
-        <div id="threeWayMerge" class="card">
-            <div class="card-body">
-                <h2>Three-way Merge</h2>
-                <p>In a three-way merge, there is no direct path between the branches, and Git must create a new commit that ties the histories of both branches together.</p>
-                <pre><code>
-# Scenario: 'feature' and 'main' have diverged
-git checkout main
-git merge feature
-                </code></pre>
-            </div>
-        </div>
-
-        <!-- Merge Conflicts -->
-        <div id="mergeConflicts" class="card">
-            <div class="card-body">
-                <h2>Merge Conflicts</h2>
-                <p>Merge conflicts occur when two branches modify the same part of a file in different ways. Git cannot automatically resolve these conflicts and requires manual intervention.</p>
-                <pre><code>
-# Scenario: Resolve conflicts manually
-git checkout main
-git merge feature
-
-# When conflict arises, resolve it in the files and then
-git add [resolved-file]
-git commit
-                </code></pre>
-            </div>
-        </div>
-
-        <!-- Unrelated History Merge -->
-        <div id="unrelatedHistory" class="card">
-            <div class="card-body">
-                <h2>Merge Unrelated Histories</h2>
-                <p>This happens when you try to merge branches that have completely different commit histories, like merging two separate projects. Git requires the <code>--allow-unrelated-histories</code> flag.</p>
-                <pre><code>
-# Scenario: Merging branches with different histories
-git checkout main
-git merge --allow-unrelated-histories feature
-                </code></pre>
-            </div>
-        </div>
+        <h1>Spin the Wheel Game 🎡</h1>
+        <canvas id="wheelCanvas" width="500" height="500"></canvas>
+        <button id="spinButton">SPIN</button>
+        <h2 id="result"></h2>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Git Merge Guide. All rights reserved.</p>
-    </footer>
-
-    <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
